@@ -1,0 +1,9 @@
+{
+  "name": "Social Circle",
+  "short_name": "Social Circle",
+  "description": "Planera ditt sociala liv på ett lugnt och överskådligt sätt.",
+  "start_url": "./#today",
+  "display": "standalone",
+  "background_color": "#f7f4ee",
+  "theme_color": "#f7f4ee"
+}
