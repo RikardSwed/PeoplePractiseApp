@@ -1,6 +1,18 @@
-export const APP_VERSION = "0.9.0";
+export const APP_VERSION = "1.0.1";
 
 export const RELEASES = [
+  {
+    version: "1.0.1",
+    date: "6 september 2026",
+    title: "Säkrare rensning av lokal data",
+    changes: ["Alla Social Circle-nycklar tas bort uttryckligen", "Tydlig bekräftelse efter lyckad rensning", "Automatisk återgång till en tom Today-skärm"],
+  },
+  {
+    version: "1.0.0",
+    date: "6 september 2026",
+    title: "Säkerhetskopior och kalenderagenda",
+    changes: ["Export av all data till en JSON-fil", "Import av en tidigare säkerhetskopia", "Möjlighet att tömma lokal data", "Expanderbar bokningslista för vald dag eller vecka"],
+  },
   {
     version: "0.9.0",
     date: "6 september 2026",

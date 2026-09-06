@@ -4,6 +4,7 @@ const LEGACY_KEYS = {
   people: "social-circle-people",
   activities: "social-circle-activities",
 };
+const COLLECTION_NAMES = ["plans", "people", "activities", "circles", "agenda", "events", "bundles", "places"];
 
 function emptyDatabase() {
   return {
@@ -23,7 +24,7 @@ export class LocalStorageAdapter {
   load() {
     const saved = safeParse(localStorage.getItem(DATABASE_KEY), null);
     if (saved?.schemaVersion && saved.collections) {
-      ["plans", "people", "activities", "circles", "agenda", "events", "bundles", "places"].forEach((name) => {
+      COLLECTION_NAMES.forEach((name) => {
         if (!Array.isArray(saved.collections[name])) saved.collections[name] = [];
       });
       return saved;
@@ -86,6 +87,39 @@ export class SocialCircleStore {
 
   snapshot() {
     return typeof structuredClone === "function" ? structuredClone(this.database) : JSON.parse(JSON.stringify(this.database));
+  }
+
+  replace(database) {
+    if (!database || typeof database !== "object" || !database.collections || typeof database.collections !== "object") {
+      throw new Error("Filen innehåller inte en giltig Social Circle-databas.");
+    }
+    const collections = {};
+    COLLECTION_NAMES.forEach((name) => {
+      if (database.collections[name] !== undefined && !Array.isArray(database.collections[name])) {
+        throw new Error(`Samlingen ${name} har ett ogiltigt format.`);
+      }
+      collections[name] = database.collections[name] || [];
+    });
+    this.database = {
+      schemaVersion: Number(database.schemaVersion) || 1,
+      updatedAt: new Date().toISOString(),
+      collections,
+      sync: { provider: "local", lastSyncedAt: null },
+    };
+    this.localAdapter.save(this.database);
+    this.listeners.forEach((listener) => listener(this.database));
+  }
+
+  clear() {
+    localStorage.removeItem(DATABASE_KEY);
+    Object.values(LEGACY_KEYS).forEach((key) => localStorage.removeItem(key));
+    this.database = emptyDatabase();
+    this.localAdapter.save(this.database);
+    this.listeners.forEach((listener) => {
+      try { listener(this.database); }
+      catch (error) { console.error("Vyn kunde inte uppdateras efter rensning", error); }
+    });
+    return COLLECTION_NAMES.every((name) => this.database.collections[name].length === 0);
   }
 }
 
