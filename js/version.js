@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.4.0 Dragon";
+export const APP_VERSION = "1.5.0 Eclipse";
 
 export const RELEASES = [
+  {
+    version: "1.5.0 Eclipse",
+    date: "6 september 2026",
+    title: "Mobil bokning och tydligare balans",
+    changes: ["Bredare mobilformulär utan överflöd för datum och tid", "Sökbara aktivitets-, person- och cirkelväljare", "Snabbskapande direkt från en bokning", "Daglig upprepning och anpassade veckodagar", "Balans visar konkreta antal i stället för abstrakta nivåer", "Stabila detaljkort vid flikbyte", "Extra stora aktivitetsfilter"],
+  },
   {
     version: "1.4.0 Dragon",
     date: "6 september 2026",
