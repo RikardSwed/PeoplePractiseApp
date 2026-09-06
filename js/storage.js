@@ -9,7 +9,7 @@ function emptyDatabase() {
   return {
     schemaVersion: 1,
     updatedAt: new Date().toISOString(),
-    collections: { plans: [], people: [], activities: [] },
+    collections: { plans: [], people: [], activities: [], circles: [], agenda: [], events: [] },
     sync: { provider: "local", lastSyncedAt: null },
   };
 }
@@ -22,7 +22,12 @@ function safeParse(value, fallback) {
 export class LocalStorageAdapter {
   load() {
     const saved = safeParse(localStorage.getItem(DATABASE_KEY), null);
-    if (saved?.schemaVersion && saved.collections) return saved;
+    if (saved?.schemaVersion && saved.collections) {
+      ["plans", "people", "activities", "circles", "agenda", "events"].forEach((name) => {
+        if (!Array.isArray(saved.collections[name])) saved.collections[name] = [];
+      });
+      return saved;
+    }
 
     const migrated = emptyDatabase();
     Object.entries(LEGACY_KEYS).forEach(([collection, key]) => {
