@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.3.0 Crab";
+export const APP_VERSION = "1.4.0 Dragon";
 
 export const RELEASES = [
+  {
+    version: "1.4.0 Dragon",
+    date: "6 september 2026",
+    title: "Mobil sökning, planstadier och appidentitet",
+    changes: ["Sökfält flyttas upp när iPhone-tangentbordet öppnas", "Fullbreddsfilter i Activities", "Kort- och listvy för aktiviteter", "Inbokade planer på personer och cirklar", "Planering, Schemalagt och Gjort som stadier", "Splash-intro och Social Circle-appikon"],
+  },
   {
     version: "1.3.0 Crab",
     date: "6 september 2026",
