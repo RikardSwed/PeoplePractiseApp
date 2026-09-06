@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.1.0 Aries";
+export const APP_VERSION = "1.2.0 Bull";
 
 export const RELEASES = [
+  {
+    version: "1.2.0 Bull",
+    date: "6 september 2026",
+    title: "Dagsbalans, miljö och smartare sökning",
+    changes: ["Egna kategorier för aktiviteter och platser", "Inomhus och utomhus som balansfaktor", "Dagens balans direkt på Today", "Ungefärlig kostnad per aktivitet", "Avstånd och restid för platser", "Filter för pris, miljö och sökområde"],
+  },
   {
     version: "1.1.0 Aries",
     date: "6 september 2026",
