@@ -7,17 +7,14 @@ function setStatus(element, message, state = "neutral") {
 }
 
 export function initFileTest() {
-  const dialog = document.querySelector("#settings-dialog");
   const openButton = document.querySelector("#open-settings");
-  const closeButton = document.querySelector("#close-settings");
   const chooseButton = document.querySelector("#choose-folder");
   const writeButton = document.querySelector("#write-test-file");
   const folderLabel = document.querySelector("#selected-folder");
   const status = document.querySelector("#file-test-status");
   const supported = "showDirectoryPicker" in window;
 
-  openButton.addEventListener("click", () => dialog.showModal());
-  closeButton.addEventListener("click", () => dialog.close());
+  openButton.addEventListener("click", () => { location.hash = "settings"; });
 
   if (!supported) {
     chooseButton.disabled = true;

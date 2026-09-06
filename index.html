@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-title" content="Social Circle" />
     <meta name="description" content="Planera ditt sociala liv på ett lugnt och överskådligt sätt." />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=0.9.0" />
     <title>Social Circle</title>
   </head>
   <body>
@@ -70,20 +70,43 @@
         <section class="view" data-view="calendar" aria-labelledby="calendar-title">
           <div class="page-heading"><div><p class="eyebrow">Överblick</p><h1 id="calendar-title">Calendar</h1></div><button class="round-button" type="button" aria-label="Lägg till plan" data-add-plan><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button></div>
           <p class="intro">Se hur ditt sociala liv får plats bland veckans alla dagar.</p>
+          <div class="calendar-modes" id="calendar-modes"><button data-calendar-mode="3">3 dagar</button><button data-calendar-mode="7">Vecka</button><button data-calendar-mode="14">2 veckor</button><button class="is-active" data-calendar-mode="month">Månad</button></div>
           <div class="calendar-card"><div class="calendar-toolbar"><button id="prev-month" aria-label="Föregående månad">‹</button><h2 id="month-label"></h2><button id="next-month" aria-label="Nästa månad">›</button></div><div class="calendar-weekdays" aria-hidden="true"><span>Mån</span><span>Tis</span><span>Ons</span><span>Tor</span><span>Fre</span><span>Lör</span><span>Sön</span></div><div class="calendar-grid" id="calendar-grid"></div></div>
           <div class="section-heading"><h2 id="selected-date-label">Vald dag</h2><button class="text-button" data-add-plan>+ Ny plan</button></div>
           <div class="plan-list" id="calendar-plans"></div><div class="mini-empty compact" id="calendar-empty"><p>Inga planer den här dagen.</p></div>
         </section>
 
         <section class="view" data-view="activities" aria-labelledby="activities-title">
-          <div class="page-heading"><div><p class="eyebrow">Saker att göra</p><h1 id="activities-title">Activities</h1></div><button class="round-button" type="button" aria-label="Lägg till aktivitet" data-open="activity-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button></div>
-          <p class="intro">Spara idéer för både spontana och planerade stunder tillsammans.</p>
-          <div class="filter-row" id="activity-filters"><button class="filter-chip is-active" data-activity-filter="all">Alla</button><button class="filter-chip" data-activity-filter="favorite">Favoriter</button></div>
-          <div class="activity-controls" aria-label="Filtrera och sortera aktiviteter">
-            <select id="activity-category-filter" aria-label="Kategori"><option value="all">Alla kategorier</option><option>Fika</option><option>Mat</option><option>Utomhus</option><option>Kultur</option><option>Träning</option><option>Annat</option></select>
-            <select id="activity-sort" aria-label="Sortera"><option value="newest">Senast tillagd</option><option value="title">Namn A–Ö</option><option value="cost">Lägst kostnad</option><option value="duration">Kortast tid</option><option value="place">Plats A–Ö</option></select>
-          </div>
-          <div class="activity-grid" id="activity-grid"></div>
+          <div class="page-heading"><div><p class="eyebrow">Saker att göra</p><h1 id="activities-title">Activities</h1></div><button class="round-button" id="add-activity-content" type="button" aria-label="Lägg till aktivitet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button></div>
+          <p class="intro">Spara aktiviteter, bygg evenemang och samla platser du vill besöka.</p>
+          <div class="segmented activity-tabs" id="activity-tabs"><button class="is-active" data-content-mode="activities">Aktiviteter</button><button data-content-mode="bundles">Evenemang</button><button data-content-mode="places">Platser</button></div>
+          <div id="activities-panel"><div class="filter-row" id="activity-filters"><button class="filter-chip is-active" data-activity-filter="all">Alla</button><button class="filter-chip" data-activity-filter="favorite">Favoriter</button></div><div class="activity-controls" aria-label="Filtrera och sortera aktiviteter"><select id="activity-category-filter" aria-label="Kategori"><option value="all">Alla kategorier</option><option>Fika</option><option>Mat</option><option>Utomhus</option><option>Kultur</option><option>Träning</option><option>Annat</option></select><select id="activity-sort" aria-label="Sortera"><option value="newest">Senast tillagd</option><option value="title">Namn A–Ö</option><option value="cost">Lägst kostnad</option><option value="duration">Kortast tid</option><option value="place">Plats A–Ö</option></select></div><div class="activity-grid" id="activity-grid"></div></div>
+          <div id="bundles-panel" hidden><p class="panel-help">Ett evenemang kombinerar flera aktiviteter till en gemensam plan.</p><div class="collection-list" id="bundle-list"></div><div class="mini-empty" id="bundle-empty"><span>✦</span><h2>Bygg ett evenemang</h2><p>Kombinera exempelvis promenad, middag och bio.</p><button class="primary-button" data-open="bundle-dialog">Skapa evenemang</button></div></div>
+          <div id="places-panel" hidden><p class="panel-help">Spara caféer, parker, restauranger och andra platser du vill besöka.</p><div class="collection-list" id="place-list"></div><div class="mini-empty" id="place-empty"><span>⌖</span><h2>Spara en plats</h2><p>Bygg upp en egen lista med platser för framtida planer.</p><button class="primary-button" data-open="place-dialog">Lägg till plats</button></div></div>
+        </section>
+
+        <section class="view settings-view" data-view="settings" aria-labelledby="settings-title">
+          <button class="back-button" type="button" data-go="today">‹ <span>Tillbaka</span></button>
+          <div class="page-heading"><div><p class="eyebrow">Meny</p><h1 id="settings-title">Settings</h1></div></div>
+          <p class="intro">Inställningar, lagring och information om Social Circle.</p>
+          <section class="version-card"><div><p class="eyebrow">Installerad version</p><strong id="app-version">—</strong></div><span class="version-check">✓</span></section>
+          <button class="settings-row" type="button" data-go="changelog"><span><b>Vad är nytt?</b><small>Se funktionerna som lagts till i varje version</small></span><span aria-hidden="true">›</span></button>
+          <h2 class="settings-section-title">Lagring</h2>
+          <section class="file-test-card" aria-labelledby="file-test-title">
+            <div class="setting-icon" aria-hidden="true">↓</div>
+            <div><h3 id="file-test-title">Testa filåtkomst</h3><p>Välj en mapp och låt Social Circle skapa och läsa tillbaka en ofarlig Markdown-testfil.</p></div>
+            <dl class="test-details"><div><dt>Vald mapp</dt><dd id="selected-folder">Ingen mapp vald</dd></div><div><dt>Testfil</dt><dd>social-circle-test.md</dd></div></dl>
+            <div class="file-test-actions"><button class="secondary-button outlined" id="choose-folder" type="button">Välj mapp</button><button class="primary-button" id="write-test-file" type="button" disabled>Testskriv fil</button></div>
+            <div class="test-status" id="file-test-status" role="status" aria-live="polite">Din vanliga appdata ligger fortfarande bara i webbläsaren.</div>
+          </section>
+          <p class="privacy-note">Testet flyttar inte personer, planer eller aktiviteter. Mappåtkomsten gäller bara under den här öppna sessionen.</p>
+        </section>
+
+        <section class="view settings-view" data-view="changelog" aria-labelledby="changelog-title">
+          <button class="back-button" type="button" data-go="settings">‹ <span>Settings</span></button>
+          <div class="page-heading"><div><p class="eyebrow">Versionshistorik</p><h1 id="changelog-title">What’s new</h1></div></div>
+          <p class="intro">Här ser du vad som har förändrats i Social Circle.</p>
+          <div class="release-list" id="release-list"></div>
         </section>
       </main>
 
@@ -105,7 +128,7 @@
 
     <dialog id="plan-dialog">
       <form method="dialog" id="plan-form">
-        <input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Social Circle</p><h2 id="plan-dialog-title">Lägg till en plan</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div>
+        <input type="hidden" name="id" /><input type="hidden" name="bundleId" /><div class="dialog-heading"><div><p class="eyebrow">Social Circle</p><h2 id="plan-dialog-title">Lägg till en plan</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div>
         <label>Vad vill du göra?<input id="plan-title" name="title" placeholder="Till exempel: Fika med Anna" required maxlength="60" /></label>
         <label>Vilken dag?<input id="plan-date" name="date" type="date" required /></label>
         <label>När?<input id="plan-time" name="time" type="time" value="18:00" required /></label>
@@ -119,25 +142,13 @@
     <dialog id="person-dialog"><form method="dialog" id="person-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">People</p><h2 id="person-dialog-title">Ny person</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Namn<input name="name" placeholder="Till exempel: Anna Larsson" required maxlength="50" /></label><label>Grupp<select name="group"><option>Vänner</option><option>Familj</option><option>Jobb</option><option>Övrigt</option></select></label><label>Hur ofta vill du höras?<select name="frequency"><option value="7">Varje vecka</option><option value="14">Varannan vecka</option><option value="30">Varje månad</option><option value="90">Några gånger per år</option></select></label><label>Anteckning<textarea name="notes" placeholder="Till exempel intressen, födelsedag eller något att följa upp" maxlength="300"></textarea></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara person</button></div></form></dialog>
     <dialog id="circle-dialog"><form method="dialog" id="circle-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Circles</p><h2 id="circle-dialog-title">Ny cirkel</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Namn<input name="name" placeholder="Till exempel: Bokklubben" required maxlength="50" /></label><fieldset><legend>Personer i cirkeln</legend><div class="check-grid" id="circle-people"></div></fieldset><label>Anteckning<textarea name="notes" placeholder="Vad förenar den här cirkeln?" maxlength="300"></textarea></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara cirkel</button></div></form></dialog>
     <dialog id="activity-dialog"><form method="dialog" id="activity-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Activities</p><h2 id="activity-dialog-title">Ny idé</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Aktivitet<input name="title" placeholder="Till exempel: Besöka ett museum" required maxlength="60" /></label><label>Kategori<select name="category"><option>Fika</option><option>Mat</option><option>Utomhus</option><option>Kultur</option><option>Träning</option><option>Annat</option></select></label><div class="form-pair"><label>Kostnad<select name="cost"><option value="0">Gratis</option><option value="1">Billigt</option><option value="2">Mellan</option><option value="3">Dyrare</option></select></label><label>Tid<select name="duration"><option value="30">30 min</option><option value="60">1 timme</option><option value="120">2 timmar</option><option value="240">Halvdag</option><option value="480">Heldag</option></select></label></div><label>Plats<input name="place" placeholder="Till exempel: Hemma, Södermalm eller utomhus" maxlength="60" /></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara idé</button></div></form></dialog>
+    <dialog id="bundle-dialog"><form method="dialog" id="bundle-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Evenemang</p><h2 id="bundle-dialog-title">Nytt evenemang</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Namn<input name="name" placeholder="Till exempel: En kväll på stan" required maxlength="70" /></label><fieldset><legend>Aktiviteter</legend><div class="check-grid" id="bundle-activities"></div></fieldset><label>Plats<select name="placeId" id="bundle-place"><option value="">Ingen vald plats</option></select></label><label>Anteckning<textarea name="notes" placeholder="Upplägg eller något att komma ihåg" maxlength="500"></textarea></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara evenemang</button></div></form></dialog>
+    <dialog id="place-dialog"><form method="dialog" id="place-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Platser</p><h2 id="place-dialog-title">Ny plats</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Namn<input name="name" placeholder="Till exempel: Rosendals trädgård" required maxlength="70" /></label><label>Adress eller område<input name="address" placeholder="Till exempel: Djurgården, Stockholm" maxlength="120" /></label><label>Kategori<select name="category"><option>Café</option><option>Restaurang</option><option>Utomhus</option><option>Kultur</option><option>Träning</option><option>Annat</option></select></label><label>Anteckning<textarea name="notes" placeholder="Varför vill du besöka platsen?" maxlength="500"></textarea></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara plats</button></div></form></dialog>
 
     <dialog id="entity-dialog"><div class="entity-panel"><div class="dialog-heading"><div><p class="eyebrow" id="entity-type">Person</p><h2 id="entity-title"></h2><p class="entity-subtitle" id="entity-subtitle"></p></div><button class="close-button" type="button" data-close="entity-dialog" aria-label="Stäng">×</button></div><div class="entity-actions"><button class="secondary-button outlined" id="edit-entity">Redigera</button><button class="primary-button" id="log-for-entity">Logga händelse</button></div><div class="segmented" id="entity-tabs"><button class="is-active" data-entity-tab="agenda">Agenda</button><button data-entity-tab="history">Historik</button></div><section id="agenda-panel"><form id="agenda-form" class="inline-form"><input name="text" aria-label="Ny agendapunkt" placeholder="Något ni ska prata om …" required maxlength="180" /><button class="primary-button">Lägg till</button></form><h3 class="list-title">Att prata om</h3><div id="agenda-active" class="agenda-list"></div><h3 class="list-title muted-title">Avbockat</h3><div id="agenda-history" class="agenda-list"></div></section><section id="history-panel" hidden><div id="entity-history" class="history-list"></div><div class="mini-empty compact" id="entity-history-empty"><p>Ingen gemensam historik ännu.</p></div></section></div></dialog>
 
     <dialog id="event-dialog"><form method="dialog" id="event-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Historik</p><h2>Logga en händelse</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Vad hände?<input name="title" placeholder="Till exempel: Söndagspromenad" required maxlength="80" /></label><div class="form-pair"><label>Datum<input name="date" type="date" required /></label><label>Tid<input name="time" type="time" value="18:00" /></label></div><label>Aktivitet<select name="activityId" id="event-activity"><option value="">Ingen vald aktivitet</option></select></label><fieldset><legend>Personer</legend><div class="check-grid" id="event-people"></div></fieldset><fieldset><legend>Cirklar</legend><div class="check-grid" id="event-circles"></div></fieldset><label>Anteckning<textarea name="notes" placeholder="Tankar eller något du vill minnas" maxlength="700"></textarea></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara i historiken</button></div></form></dialog>
 
-    <dialog id="settings-dialog">
-      <div class="settings-panel">
-        <div class="dialog-heading"><div><p class="eyebrow">Meny</p><h2>Inställningar</h2></div><button class="close-button" id="close-settings" type="button" aria-label="Stäng">×</button></div>
-        <section class="file-test-card" aria-labelledby="file-test-title">
-          <div class="setting-icon" aria-hidden="true">↓</div>
-          <div><h3 id="file-test-title">Testa filåtkomst</h3><p>Välj en mapp och låt Social Circle skapa och läsa tillbaka en ofarlig Markdown-testfil.</p></div>
-          <dl class="test-details"><div><dt>Vald mapp</dt><dd id="selected-folder">Ingen mapp vald</dd></div><div><dt>Testfil</dt><dd>social-circle-test.md</dd></div></dl>
-          <div class="file-test-actions"><button class="secondary-button outlined" id="choose-folder" type="button">Välj mapp</button><button class="primary-button" id="write-test-file" type="button" disabled>Testskriv fil</button></div>
-          <div class="test-status" id="file-test-status" role="status" aria-live="polite">Din vanliga appdata ligger fortfarande bara i webbläsaren.</div>
-        </section>
-        <p class="privacy-note">Testet flyttar inte personer, planer eller aktiviteter. Mappåtkomsten gäller bara under den här öppna sessionen.</p>
-      </div>
-    </dialog>
-
-    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/app.js?v=0.9.0"></script>
   </body>
 </html>

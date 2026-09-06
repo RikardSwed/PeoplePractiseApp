@@ -9,7 +9,7 @@ function emptyDatabase() {
   return {
     schemaVersion: 1,
     updatedAt: new Date().toISOString(),
-    collections: { plans: [], people: [], activities: [], circles: [], agenda: [], events: [] },
+    collections: { plans: [], people: [], activities: [], circles: [], agenda: [], events: [], bundles: [], places: [] },
     sync: { provider: "local", lastSyncedAt: null },
   };
 }
@@ -23,7 +23,7 @@ export class LocalStorageAdapter {
   load() {
     const saved = safeParse(localStorage.getItem(DATABASE_KEY), null);
     if (saved?.schemaVersion && saved.collections) {
-      ["plans", "people", "activities", "circles", "agenda", "events"].forEach((name) => {
+      ["plans", "people", "activities", "circles", "agenda", "events", "bundles", "places"].forEach((name) => {
         if (!Array.isArray(saved.collections[name])) saved.collections[name] = [];
       });
       return saved;
