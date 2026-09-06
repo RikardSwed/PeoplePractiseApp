@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.0.1";
+export const APP_VERSION = "1.1.0 Aries";
 
 export const RELEASES = [
+  {
+    version: "1.1.0 Aries",
+    date: "6 september 2026",
+    title: "Intressen och veckobalans",
+    changes: ["Intressen för personer", "Aktivitetsnivå och social nivå för aktiviteter", "Veckostatistik för historiska och framtida veckor", "Balansförslag för aktivitet, återhämtning, social tid och egen tid"],
+  },
   {
     version: "1.0.1",
     date: "6 september 2026",
