@@ -60,35 +60,25 @@
         </section>
 
         <section class="view" data-view="people" aria-labelledby="people-title">
-          <p class="eyebrow">Dina relationer</p>
-          <h1 id="people-title">People</h1>
+          <div class="page-heading"><div><p class="eyebrow">Dina relationer</p><h1 id="people-title">People</h1></div><button class="round-button" type="button" aria-label="Lägg till person" data-open="person-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button></div>
           <p class="intro">Samla människorna du bryr dig om och håll kontakten levande.</p>
-          <div class="preview-card">
-            <div class="avatar-stack" aria-hidden="true"><span>AL</span><span>MK</span><span>+</span></div>
-            <div><h2>Din cirkel</h2><p>Här kommer du snart kunna lägga till personer och skapa grupper.</p></div>
-          </div>
+          <div class="filter-row" id="people-filters" aria-label="Filtrera personer"><button class="filter-chip is-active" data-group="Alla">Alla</button><button class="filter-chip" data-group="Vänner">Vänner</button><button class="filter-chip" data-group="Familj">Familj</button><button class="filter-chip" data-group="Jobb">Jobb</button></div>
+          <div class="people-list" id="people-list" aria-live="polite"></div>
+          <div class="mini-empty" id="people-empty"><span>♡</span><h2>Din cirkel börjar här</h2><p>Lägg till den första personen som du vill hålla kontakten med.</p><button class="primary-button" data-open="person-dialog">Lägg till person</button></div>
         </section>
 
         <section class="view" data-view="calendar" aria-labelledby="calendar-title">
-          <p class="eyebrow">Överblick</p>
-          <h1 id="calendar-title">Calendar</h1>
+          <div class="page-heading"><div><p class="eyebrow">Överblick</p><h1 id="calendar-title">Calendar</h1></div><button class="round-button" type="button" aria-label="Lägg till plan" data-add-plan><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button></div>
           <p class="intro">Se hur ditt sociala liv får plats bland veckans alla dagar.</p>
-          <div class="week-preview" aria-label="Veckoöversikt">
-            <span><small>M</small><b>7</b></span><span><small>T</small><b>8</b></span><span><small>O</small><b>9</b></span><span class="selected"><small>T</small><b>10</b></span><span><small>F</small><b>11</b></span><span><small>L</small><b>12</b></span><span><small>S</small><b>13</b></span>
-          </div>
-          <div class="coming-soon"><span aria-hidden="true">↗</span><div><h2>Kalendern växer fram</h2><p>Snart kan du planera, flytta och få överblick över dina sociala stunder här.</p></div></div>
+          <div class="calendar-card"><div class="calendar-toolbar"><button id="prev-month" aria-label="Föregående månad">‹</button><h2 id="month-label"></h2><button id="next-month" aria-label="Nästa månad">›</button></div><div class="calendar-weekdays" aria-hidden="true"><span>Mån</span><span>Tis</span><span>Ons</span><span>Tor</span><span>Fre</span><span>Lör</span><span>Sön</span></div><div class="calendar-grid" id="calendar-grid"></div></div>
+          <div class="section-heading"><h2 id="selected-date-label">Vald dag</h2><button class="text-button" data-add-plan>+ Ny plan</button></div>
+          <div class="plan-list" id="calendar-plans"></div><div class="mini-empty compact" id="calendar-empty"><p>Inga planer den här dagen.</p></div>
         </section>
 
         <section class="view" data-view="activities" aria-labelledby="activities-title">
-          <p class="eyebrow">Saker att göra</p>
-          <h1 id="activities-title">Activities</h1>
+          <div class="page-heading"><div><p class="eyebrow">Saker att göra</p><h1 id="activities-title">Activities</h1></div><button class="round-button" type="button" aria-label="Lägg till aktivitet" data-open="activity-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button></div>
           <p class="intro">Spara idéer för både spontana och planerade stunder tillsammans.</p>
-          <div class="activity-grid">
-            <article><span>☕</span><h2>Fika</h2><p>En enkel stund att fånga upp.</p></article>
-            <article><span>🌿</span><h2>Utomhus</h2><p>Promenad, park eller utflykt.</p></article>
-            <article><span>🍽</span><h2>Middag</h2><p>Hemma eller på stan.</p></article>
-            <article class="add-activity"><span>＋</span><h2>Ny aktivitet</h2><p>Fler kategorier kommer snart.</p></article>
-          </div>
+          <div class="filter-row" id="activity-filters"><button class="filter-chip is-active" data-activity-filter="all">Alla</button><button class="filter-chip" data-activity-filter="favorite">Favoriter</button></div><div class="activity-grid" id="activity-grid"></div>
         </section>
       </main>
 
@@ -110,12 +100,15 @@
 
     <dialog id="plan-dialog">
       <form method="dialog" id="plan-form">
-        <div class="dialog-heading"><div><p class="eyebrow">Today</p><h2>Lägg till en plan</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div>
+        <div class="dialog-heading"><div><p class="eyebrow">Social Circle</p><h2>Lägg till en plan</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div>
         <label>Vad vill du göra?<input id="plan-title" name="title" placeholder="Till exempel: Fika med Anna" required maxlength="60" /></label>
+        <label>Vilken dag?<input id="plan-date" name="date" type="date" required /></label>
         <label>När?<input id="plan-time" name="time" type="time" value="18:00" required /></label>
         <div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara plan</button></div>
       </form>
     </dialog>
+    <dialog id="person-dialog"><form method="dialog" id="person-form"><div class="dialog-heading"><div><p class="eyebrow">People</p><h2>Ny person</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Namn<input name="name" placeholder="Till exempel: Anna Larsson" required maxlength="50" /></label><label>Grupp<select name="group"><option>Vänner</option><option>Familj</option><option>Jobb</option><option>Övrigt</option></select></label><label>Hur ofta vill du höras?<select name="frequency"><option value="7">Varje vecka</option><option value="14">Varannan vecka</option><option value="30">Varje månad</option><option value="90">Några gånger per år</option></select></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara person</button></div></form></dialog>
+    <dialog id="activity-dialog"><form method="dialog" id="activity-form"><div class="dialog-heading"><div><p class="eyebrow">Activities</p><h2>Ny idé</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Aktivitet<input name="title" placeholder="Till exempel: Besöka ett museum" required maxlength="60" /></label><label>Kategori<select name="category"><option>Fika</option><option>Mat</option><option>Utomhus</option><option>Kultur</option><option>Träning</option><option>Annat</option></select></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara idé</button></div></form></dialog>
 
     <script src="js/app.js"></script>
   </body>
