@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.2.0 Bull";
+export const APP_VERSION = "1.3.0 Crab";
 
 export const RELEASES = [
+  {
+    version: "1.3.0 Crab",
+    date: "6 september 2026",
+    title: "Återkommande planer och bättre sökning",
+    changes: ["Stabila och alltid fungerande stängknappar i formulär", "Bättre skrollning i modalvyer på iPhone", "Återkommande planer varje eller varannan vecka samt varje månad", "Sökning bland personer, aktiviteter, evenemang och platser", "Större aktivitetsfilter", "Dagens planer visas före balansanalysen"],
+  },
   {
     version: "1.2.0 Bull",
     date: "6 september 2026",
