@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-title" content="Social Circle" />
     <meta name="description" content="Planera ditt sociala liv på ett lugnt och överskådligt sätt." />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="css/style.css?v=0.9.0" />
+    <link rel="stylesheet" href="css/style.css?v=1.0.0" />
     <title>Social Circle</title>
   </head>
   <body>
@@ -72,8 +72,7 @@
           <p class="intro">Se hur ditt sociala liv får plats bland veckans alla dagar.</p>
           <div class="calendar-modes" id="calendar-modes"><button data-calendar-mode="3">3 dagar</button><button data-calendar-mode="7">Vecka</button><button data-calendar-mode="14">2 veckor</button><button class="is-active" data-calendar-mode="month">Månad</button></div>
           <div class="calendar-card"><div class="calendar-toolbar"><button id="prev-month" aria-label="Föregående månad">‹</button><h2 id="month-label"></h2><button id="next-month" aria-label="Nästa månad">›</button></div><div class="calendar-weekdays" aria-hidden="true"><span>Mån</span><span>Tis</span><span>Ons</span><span>Tor</span><span>Fre</span><span>Lör</span><span>Sön</span></div><div class="calendar-grid" id="calendar-grid"></div></div>
-          <div class="section-heading"><h2 id="selected-date-label">Vald dag</h2><button class="text-button" data-add-plan>+ Ny plan</button></div>
-          <div class="plan-list" id="calendar-plans"></div><div class="mini-empty compact" id="calendar-empty"><p>Inga planer den här dagen.</p></div>
+          <details class="calendar-agenda" open><summary><span><b>Bokningslista</b><small id="calendar-agenda-summary">Vald dag</small></span><span class="disclosure" aria-hidden="true">⌄</span></summary><div class="calendar-agenda-body"><div class="segmented" id="calendar-agenda-tabs"><button class="is-active" data-agenda-mode="day">Dag</button><button data-agenda-mode="week">Vecka</button></div><div class="section-heading"><h2 id="selected-date-label">Vald dag</h2><button class="text-button" data-add-plan>+ Ny plan</button></div><div class="plan-list" id="calendar-plans"></div><div class="mini-empty compact" id="calendar-empty"><p>Inga planer under perioden.</p></div></div></details>
         </section>
 
         <section class="view" data-view="activities" aria-labelledby="activities-title">
@@ -92,6 +91,7 @@
           <section class="version-card"><div><p class="eyebrow">Installerad version</p><strong id="app-version">—</strong></div><span class="version-check">✓</span></section>
           <button class="settings-row" type="button" data-go="changelog"><span><b>Vad är nytt?</b><small>Se funktionerna som lagts till i varje version</small></span><span aria-hidden="true">›</span></button>
           <h2 class="settings-section-title">Lagring</h2>
+          <section class="backup-card" aria-labelledby="backup-title"><div class="setting-icon" aria-hidden="true">↕</div><div><h3 id="backup-title">Säkerhetskopia</h3><p>Exportera allt till en JSON-fil eller återställ appen från en tidigare fil.</p></div><div class="backup-actions"><button class="primary-button" id="export-data" type="button">Exportera all data</button><button class="secondary-button outlined" id="import-data" type="button">Importera fil</button><input id="import-data-file" type="file" accept="application/json,.json" hidden /></div><div class="test-status" id="backup-status" role="status" aria-live="polite">Data ligger fortfarande i localStorage tills du exporterar en kopia.</div></section>
           <section class="file-test-card" aria-labelledby="file-test-title">
             <div class="setting-icon" aria-hidden="true">↓</div>
             <div><h3 id="file-test-title">Testa filåtkomst</h3><p>Välj en mapp och låt Social Circle skapa och läsa tillbaka en ofarlig Markdown-testfil.</p></div>
@@ -100,6 +100,7 @@
             <div class="test-status" id="file-test-status" role="status" aria-live="polite">Din vanliga appdata ligger fortfarande bara i webbläsaren.</div>
           </section>
           <p class="privacy-note">Testet flyttar inte personer, planer eller aktiviteter. Mappåtkomsten gäller bara under den här öppna sessionen.</p>
+          <section class="danger-zone"><div><h3>Töm lokal data</h3><p>Tar bort personer, planer, historik, aktiviteter, evenemang och platser från den här webbläsaren.</p></div><button class="danger-button" id="clear-local-data" type="button">Töm localStorage</button></section>
         </section>
 
         <section class="view settings-view" data-view="changelog" aria-labelledby="changelog-title">
@@ -149,6 +150,6 @@
 
     <dialog id="event-dialog"><form method="dialog" id="event-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Historik</p><h2>Logga en händelse</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Vad hände?<input name="title" placeholder="Till exempel: Söndagspromenad" required maxlength="80" /></label><div class="form-pair"><label>Datum<input name="date" type="date" required /></label><label>Tid<input name="time" type="time" value="18:00" /></label></div><label>Aktivitet<select name="activityId" id="event-activity"><option value="">Ingen vald aktivitet</option></select></label><fieldset><legend>Personer</legend><div class="check-grid" id="event-people"></div></fieldset><fieldset><legend>Cirklar</legend><div class="check-grid" id="event-circles"></div></fieldset><label>Anteckning<textarea name="notes" placeholder="Tankar eller något du vill minnas" maxlength="700"></textarea></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara i historiken</button></div></form></dialog>
 
-    <script type="module" src="js/app.js?v=0.9.0"></script>
+    <script type="module" src="js/app.js?v=1.0.0"></script>
   </body>
 </html>
