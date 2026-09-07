@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.5.0 Eclipse";
+export const APP_VERSION = "1.6.0 Fish";
 
 export const RELEASES = [
+  {
+    version: "1.6.0 Fish",
+    date: "7 september 2026",
+    title: "Stabila dialoger och smidigare evenemang",
+    changes: ["Dialoger är fastlåsta och skrollar endast lodrätt", "Högre rullgardiner och filter i hela appen", "Sök aktiviteter när ett evenemang skapas", "Sök platser när ett evenemang skapas", "Skapa ny aktivitet eller plats direkt från evenemanget"],
+  },
   {
     version: "1.5.0 Eclipse",
     date: "6 september 2026",
