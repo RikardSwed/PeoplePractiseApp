@@ -88,4 +88,19 @@ fieldset { margin:17px 0 0; padding:13px; border:1px solid var(--line); border-r
 @media (max-width: 600px) { .form-pair { grid-template-columns:1fr; }.activity-controls,.place-controls { grid-template-columns:1fr; }dialog form,.entity-panel { padding:18px; } }
 @media (max-width: 520px) { .range-calendar.range-7,.range-calendar.range-14 { grid-template-columns:repeat(7,68px); overflow-x:auto; padding-bottom:5px; }.range-day { min-height:100px; }.collection-card { grid-template-columns:auto 1fr; }.collection-actions { grid-column:2; flex-direction:row; align-items:center; }.activity-controls select,.place-controls select { min-height:70px; font-size:17px; } }
 @media (max-width: 390px) { .app-shell { padding-left: 16px; padding-right: 16px; }.daily-note { padding: 15px; }.bottom-nav { left: 8px; right: 8px; }.bottom-nav a { font-size: 9px; }.activity-grid { gap: 8px; }.activity-grid article { padding: 15px; }.person-card { grid-template-columns: auto 1fr auto; }.calendar-card { padding: 11px; }.form-pair { grid-template-columns:1fr; }.entity-panel, dialog form { padding:20px; } }
+/* Version 1.7: större tryckytor och aktivitetens samlade detaljvy. */
+select { min-height:76px; padding-top:8px; padding-bottom:8px; }
+.activity-controls,.place-controls { gap:14px; }
+.activity-controls select,.place-controls select { min-height:80px; padding-left:19px; padding-right:19px; font-size:17px; }
+.entity-actions:has(#plan-entity:not([hidden])) { grid-template-columns:repeat(3,1fr); }
+.activity-detail { margin-bottom:18px; padding:18px; border-radius:20px; background:var(--paper); }
+.detail-tags { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px; }
+.detail-tags span { padding:7px 10px; border-radius:99px; background:var(--sage-soft); color:var(--sage-dark); font-size:11px; font-weight:800; }
+.activity-detail dl { display:grid; margin:0; }
+.activity-detail dl div { display:flex; justify-content:space-between; gap:18px; padding:11px 0; border-top:1px solid var(--line); }
+.activity-detail dt { color:var(--muted); font-size:12px; }
+.activity-detail dd { margin:0; font-size:12px; font-weight:800; text-align:right; }
+.activity-card.clickable-card { cursor:pointer; transition:transform .15s ease,box-shadow .15s ease; }
+.activity-card.clickable-card:active { transform:scale(.985); }
+@media (max-width:520px) { .activity-controls select,.place-controls select { min-height:84px; font-size:18px; }.entity-actions:has(#plan-entity:not([hidden])) { grid-template-columns:1fr; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
