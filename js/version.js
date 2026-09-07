@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.6.0 Fish";
+export const APP_VERSION = "1.7.0 Fox";
 
 export const RELEASES = [
+  {
+    version: "1.7.0 Fox",
+    date: "7 september 2026",
+    title: "Aktivitetsdetaljer, taggar och massimport",
+    changes: ["Hela aktivitetskortet öppnar en samlad detaljvy", "Planera, visa historik eller redigera från detaljvyn", "Flera taggar på aktiviteter, evenemang och platser", "Ännu högre rullgardiner och filter", "Massimport av personer, aktiviteter, platser och evenemang från Markdown", "Nedladdningsbar Markdown-mall med dubblettskydd"],
+  },
   {
     version: "1.6.0 Fish",
     date: "7 september 2026",
