@@ -125,4 +125,20 @@ select { min-height:76px; padding-top:8px; padding-bottom:8px; }
 .toggle-row input { width:24px; min-height:24px; margin:0; accent-color:var(--sage-dark); }
 .toggle-row span b,.toggle-row span small { display:block; }
 .toggle-row span small { margin-top:3px; color:var(--muted); font-weight:500; }
+/* Version 1.9: kompakt aktivitetslista och kalenderfilter för rutiner. */
+.view-switch button { flex:0 1 auto; }
+.activity-grid.is-compact-view { grid-template-columns:1fr; gap:5px; }
+.activity-grid.is-compact-view article { position:relative; min-height:0; padding:11px 52px 11px 14px; border-radius:14px; box-shadow:0 3px 11px rgba(49,64,53,.055); }
+.activity-grid.is-compact-view .activity-top { position:absolute; top:50%; right:10px; transform:translateY(-50%); }
+.activity-grid.is-compact-view .activity-top > span { display:none; }
+.activity-grid.is-compact-view .favorite-button { width:34px; height:34px; }
+.activity-grid.is-compact-view h2 { margin:0 0 3px; font-size:15px; }
+.activity-grid.is-compact-view .activity-meta { min-height:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:11px; }
+.activity-grid.is-compact-view .activity-traits { display:none; }
+.calendar-routine-toggle { display:flex; grid-template-columns:none; flex-direction:row; align-items:center; gap:11px; margin:0 2px 13px; padding:12px 14px; border:1px solid var(--line); border-radius:15px; background:var(--surface); cursor:pointer; }
+.calendar-routine-toggle input { flex:0 0 auto; width:24px; min-height:24px; margin:0; accent-color:var(--sage-dark); }
+.calendar-routine-toggle span { min-width:0; }
+.calendar-routine-toggle b,.calendar-routine-toggle small { display:block; }
+.calendar-routine-toggle small { margin-top:2px; color:var(--muted); font-size:10px; font-weight:500; }
+@media (max-width:390px) { .view-switch button { padding:0 11px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
