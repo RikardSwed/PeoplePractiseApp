@@ -103,4 +103,26 @@ select { min-height:76px; padding-top:8px; padding-bottom:8px; }
 .activity-card.clickable-card { cursor:pointer; transition:transform .15s ease,box-shadow .15s ease; }
 .activity-card.clickable-card:active { transform:scale(.985); }
 @media (max-width:520px) { .activity-controls select,.place-controls select { min-height:84px; font-size:18px; }.entity-actions:has(#plan-entity:not([hidden])) { grid-template-columns:1fr; } }
+/* Version 1.8: grupperad veckolista och utfällbara personuppgifter. */
+.back-button { min-height:48px; font-size:17px; gap:7px; }
+.back-button span { font-size:17px; }
+.calendar-day-group + .calendar-day-group { margin-top:20px; }
+.calendar-day-heading { position:sticky; top:0; z-index:1; margin:0 -2px 9px; padding:10px 4px 8px; background:var(--surface); color:var(--sage-dark); font-size:15px; text-transform:capitalize; border-bottom:1px solid var(--line); }
+.calendar-day-bookings { display:grid; gap:8px; }
+.calendar-day-empty { margin:0; padding:13px 4px; color:var(--muted); font-size:12px; }
+.person-details { margin-top:26px; border:1px solid var(--line); border-radius:18px; background:var(--paper); overflow:hidden; }
+.person-details summary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:17px; cursor:pointer; list-style:none; }
+.person-details summary::-webkit-details-marker { display:none; }
+.person-details summary b,.person-details summary small { display:block; }
+.person-details summary small { margin-top:4px; color:var(--muted); font-size:11px; font-weight:500; }
+.person-details .disclosure { color:var(--sage-dark); font-size:21px; transition:transform .18s ease; }
+.person-details[open] .disclosure { transform:rotate(180deg); }
+.person-details dl { margin:0; padding:0 17px 15px; }
+.person-details dl div { display:grid; grid-template-columns:minmax(95px,.7fr) minmax(0,1.3fr); gap:14px; padding:12px 0; border-top:1px solid var(--line); }
+.person-details dt { color:var(--muted); font-size:12px; }
+.person-details dd { margin:0; overflow-wrap:anywhere; font-size:12px; font-weight:750; text-align:right; white-space:pre-wrap; }
+.toggle-row { grid-template-columns:auto 1fr; align-items:center; gap:12px; padding:14px; border:1px solid var(--line); border-radius:15px; background:var(--paper); cursor:pointer; }
+.toggle-row input { width:24px; min-height:24px; margin:0; accent-color:var(--sage-dark); }
+.toggle-row span b,.toggle-row span small { display:block; }
+.toggle-row span small { margin-top:3px; color:var(--muted); font-weight:500; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
