@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.9.0 Lynx";
+export const APP_VERSION = "2.0.0 Raven";
 
 export const RELEASES = [
+  {
+    version: "2.0.0 Raven",
+    date: "8 september 2026",
+    title: "Kontaktpåminnelser och redigerbara serier",
+    changes: ["Skapa en person direkt när en cirkel redigeras", "Skapa en förifylld plan från personer och cirklar", "Länkar till Facebook, Instagram, LinkedIn och andra profiler", "Kontaktintervall från varje dag till några gånger per år", "Påminnelser för personer och cirklar på Today", "Ändra ett tillfälle eller detta och alla framtida i en serie", "Ta bort ett enskilt eller alla framtida serietillfällen", "Visa framtida bokningar för aktiviteter, evenemang och platser"],
+  },
   {
     version: "1.9.0 Lynx",
     date: "8 september 2026",
