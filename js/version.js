@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.8.0 Owl";
+export const APP_VERSION = "1.9.0 Lynx";
 
 export const RELEASES = [
+  {
+    version: "1.9.0 Lynx",
+    date: "8 september 2026",
+    title: "Kompakta aktiviteter och rutiner",
+    changes: ["Ny kompakt aktivitetslista för att se fler aktiviteter samtidigt", "Planer kan markeras som rutiner", "Rutiner märks tydligt på bokningskorten", "Visa eller dölj rutiner i kalendern", "Kalenderrutor, bokningslista och veckobalans följer rutinfiltreringen"],
+  },
   {
     version: "1.8.0 Owl",
     date: "7 september 2026",
