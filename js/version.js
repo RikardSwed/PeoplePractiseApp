@@ -1,6 +1,12 @@
-export const APP_VERSION = "1.7.0 Fox";
+export const APP_VERSION = "1.8.0 Owl";
 
 export const RELEASES = [
+  {
+    version: "1.8.0 Owl",
+    date: "7 september 2026",
+    title: "Tydligare veckor och rikare personprofiler",
+    changes: ["Veckans bokningar grupperas under måndag till söndag", "Bokningar sorteras efter tid inom varje veckodag", "Större Tillbaka-knapp i Settings", "Adress, telefon, e-post, födelsedag och jobb på personer", "Redigera en persons cirkelmedlemskap direkt", "Utfällbara personuppgifter under agendan"],
+  },
   {
     version: "1.7.0 Fox",
     date: "7 september 2026",
