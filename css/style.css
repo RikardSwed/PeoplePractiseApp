@@ -141,4 +141,17 @@ select { min-height:76px; padding-top:8px; padding-bottom:8px; }
 .calendar-routine-toggle b,.calendar-routine-toggle small { display:block; }
 .calendar-routine-toggle small { margin-top:2px; color:var(--muted); font-size:10px; font-weight:500; }
 @media (max-width:390px) { .view-switch button { padding:0 11px; } }
+/* Version 2.0: kontaktpåminnelser, sociala länkar och framtida bokningar. */
+.contact-reminders { margin:4px 0 20px; }
+#contact-reminders { display:grid; gap:7px; }
+.reminder-row { width:100%; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:11px; padding:13px 14px; border:1px solid rgba(154,85,76,.16); border-radius:16px; background:var(--peach); color:var(--ink); text-align:left; cursor:pointer; }
+.reminder-row > span:first-child { width:34px; height:34px; display:grid; place-items:center; border-radius:50%; background:rgba(255,255,255,.52); }
+.reminder-row b,.reminder-row small { display:block; }
+.reminder-row small { margin-top:3px; color:var(--muted); font-size:11px; }
+.reminder-row i { color:var(--sage-dark); font:24px Georgia,serif; font-style:normal; }
+.social-links-fields { display:grid; grid-template-columns:1fr 1fr; gap:0 10px; }
+.social-links-fields legend { grid-column:1/-1; }
+.person-details a { color:var(--sage-dark); text-decoration-thickness:1px; }
+#future-plans-dialog .entity-panel { min-height:min(520px,calc(100dvh - 12px)); }
+@media (max-width:520px) { .social-links-fields { grid-template-columns:1fr; }.entity-actions:has(#plan-entity:not([hidden])) { grid-template-columns:1fr 1fr; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
