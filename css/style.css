@@ -154,4 +154,22 @@ select { min-height:76px; padding-top:8px; padding-bottom:8px; }
 .person-details a { color:var(--sage-dark); text-decoration-thickness:1px; }
 #future-plans-dialog .entity-panel { min-height:min(520px,calc(100dvh - 12px)); }
 @media (max-width:520px) { .social-links-fields { grid-template-columns:1fr; }.entity-actions:has(#plan-entity:not([hidden])) { grid-template-columns:1fr 1fr; } }
+/* Version 2.1: utfällbara filter och kalenderaspekter. */
+.filter-toggle-button { width:100%; min-height:54px; margin:0 0 12px; border:1px solid var(--line); border-radius:15px; background:var(--surface); color:var(--ink); font-size:15px; font-weight:850; cursor:pointer; }
+.filter-toggle-button::after { content:"  +"; color:var(--sage); }
+.filter-toggle-button.is-active::after { content:"  −"; }
+#activity-filter-panel { margin-bottom:16px; padding:14px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.35); }
+#activity-filter-panel .activity-controls { margin-bottom:0; }
+.calendar-aspects { margin:0 0 13px; border:1px solid var(--line); border-radius:17px; background:var(--surface); overflow:hidden; }
+.calendar-aspects > summary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px; cursor:pointer; list-style:none; }
+.calendar-aspects > summary::-webkit-details-marker { display:none; }
+.calendar-aspects > summary b,.calendar-aspects > summary small { display:block; }
+.calendar-aspects > summary small { margin-top:3px; color:var(--muted); font-size:10px; font-weight:500; }
+.calendar-aspects > summary .disclosure { color:var(--sage-dark); font-size:20px; transition:transform .18s ease; }
+.calendar-aspects[open] > summary .disclosure { transform:rotate(180deg); }
+.calendar-aspects > div { display:grid; gap:8px; padding:0 12px 12px; }
+.calendar-aspects .calendar-routine-toggle { margin:0; background:var(--paper); }
+.collection-card.clickable-card { cursor:pointer; }
+.collection-card.clickable-card:active { transform:scale(.99); }
+#content-detail-dialog .activity-detail { margin-top:4px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
