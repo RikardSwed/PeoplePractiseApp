@@ -172,4 +172,8 @@ select { min-height:76px; padding-top:8px; padding-bottom:8px; }
 .collection-card.clickable-card { cursor:pointer; }
 .collection-card.clickable-card:active { transform:scale(.99); }
 #content-detail-dialog .activity-detail { margin-top:4px; }
+/* Version 2.2: stabil mobil sökning och fokusstyrda väljare. */
+.section-search { scroll-margin-top:8px; overflow-anchor:none; }
+.people-list,.activity-grid { overflow-anchor:none; }
+#plan-activity-results[hidden],#plan-place-results[hidden],#plan-people[hidden],#plan-circles[hidden] { display:none !important; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
