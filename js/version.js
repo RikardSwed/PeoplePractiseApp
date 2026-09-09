@@ -1,6 +1,12 @@
-export const APP_VERSION = "2.1.0 Swan";
+export const APP_VERSION = "2.2.0 Gecko";
 
 export const RELEASES = [
+  {
+    version: "2.2.0 Gecko",
+    date: "9 september 2026",
+    title: "Stabila sökfält och automatisk historik",
+    changes: ["Aktivitetsalternativ visas bara när fältet används", "Person- och cirkelväljare öppnas och stängs vid fokus", "Plats kan sökas eller skapas direkt i en plan", "Stabil sökning på People utan fördröjda skrollhopp", "Passerade planer flyttas automatiskt till historiken"],
+  },
   {
     version: "2.1.0 Swan",
     date: "8 september 2026",
