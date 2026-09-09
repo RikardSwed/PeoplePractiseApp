@@ -1,6 +1,12 @@
-export const APP_VERSION = "2.0.0 Raven";
+export const APP_VERSION = "2.1.0 Swan";
 
 export const RELEASES = [
+  {
+    version: "2.1.0 Swan",
+    date: "8 september 2026",
+    title: "Detaljvyer, platsval och kalenderval",
+    changes: ["Zoomning av appgränssnittet är avstängd", "Aktivitetsfilter kan visas och döljas", "Välj en sparad plats när en plan skapas", "Klickbara detaljvyer för evenemang och platser", "Framtida bokningar och historik från plats- och evenemangsvyer", "Utfällbara kalenderaspekter för rutiner och födelsedagar", "Räknare för dagar sedan senaste personinteraktion"],
+  },
   {
     version: "2.0.0 Raven",
     date: "8 september 2026",
