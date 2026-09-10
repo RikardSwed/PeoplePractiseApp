@@ -1,6 +1,12 @@
-export const APP_VERSION = "2.3.0 Heron";
+export const APP_VERSION = "2.3.1 Heron";
 
 export const RELEASES = [
+  {
+    version: "2.3.1 Heron",
+    date: "10 september 2026",
+    title: "Stabil appstart",
+    changes: ["Rättad startordning för filtren Fysisk nivå och Social nivå", "Nya cacheadresser tvingar GitHub Pages och iPhone att hämta den rättade koden"],
+  },
   {
     version: "2.3.0 Heron",
     date: "10 september 2026",
