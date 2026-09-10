@@ -1,6 +1,12 @@
-export const APP_VERSION = "2.2.0 Gecko";
+export const APP_VERSION = "2.3.0 Heron";
 
 export const RELEASES = [
+  {
+    version: "2.3.0 Heron",
+    date: "10 september 2026",
+    title: "Mål, projekt, resor och större evenemang",
+    changes: ["Activities har nu sex tydliga bibliotek: aktiviteter, evenemang, platser, mål, projekt och resor", "Evenemang kan vara publika arrangemang över flera dagar eller egna upplägg, med arrangör, kostnad, status och länk", "Relationsmål kan knytas till personer och cirklar och följas som konkreta mål eller strävansmål", "Projekt samlar deltagare, status, deadline och nästa steg", "Resor samlar sträcka, tider, transportmedel, kostnad och bokningsreferens", "Relationsbild för personer och cirklar rymmer styrkor, utmaningar, behov, gränser, frågor och uppskattning"],
+  },
   {
     version: "2.2.0 Gecko",
     date: "9 september 2026",

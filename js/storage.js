@@ -4,13 +4,13 @@ const LEGACY_KEYS = {
   people: "social-circle-people",
   activities: "social-circle-activities",
 };
-const COLLECTION_NAMES = ["plans", "people", "activities", "circles", "agenda", "events", "bundles", "places"];
+const COLLECTION_NAMES = ["plans", "people", "activities", "circles", "agenda", "events", "bundles", "places", "goals", "projects", "trips"];
 
 function emptyDatabase() {
   return {
     schemaVersion: 1,
     updatedAt: new Date().toISOString(),
-    collections: { plans: [], people: [], activities: [], circles: [], agenda: [], events: [], bundles: [], places: [] },
+    collections: { plans: [], people: [], activities: [], circles: [], agenda: [], events: [], bundles: [], places: [], goals: [], projects: [], trips: [] },
     sync: { provider: "local", lastSyncedAt: null },
   };
 }
