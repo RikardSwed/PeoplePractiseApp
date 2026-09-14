@@ -11,6 +11,7 @@ function emptyDatabase() {
     schemaVersion: 1,
     updatedAt: new Date().toISOString(),
     collections: { plans: [], people: [], activities: [], circles: [], agenda: [], events: [], bundles: [], places: [], goals: [], projects: [], trips: [] },
+    preferences: {},
     sync: { provider: "local", lastSyncedAt: null },
   };
 }
@@ -68,6 +69,13 @@ export class SocialCircleStore {
     if (this.remoteAdapter) this.remoteAdapter.push(this.database).catch(() => {});
   }
 
+  setPreference(name, value) {
+    this.database.preferences = { ...(this.database.preferences || {}), [name]: value };
+    this.database.updatedAt = new Date().toISOString();
+    this.localAdapter.save(this.database);
+    this.listeners.forEach((listener) => listener(this.database));
+  }
+
   subscribe(listener) {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
@@ -104,6 +112,7 @@ export class SocialCircleStore {
       schemaVersion: Number(database.schemaVersion) || 1,
       updatedAt: new Date().toISOString(),
       collections,
+      preferences: database.preferences && typeof database.preferences === "object" && !Array.isArray(database.preferences) ? database.preferences : {},
       sync: { provider: "local", lastSyncedAt: null },
     };
     this.localAdapter.save(this.database);

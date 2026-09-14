@@ -11,7 +11,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icons/social-circle.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-    <link rel="stylesheet" href="css/style.css?v=2.3.1" />
+    <link rel="stylesheet" href="css/style.css?v=2.4.0" />
     <title>Social Circle</title>
   </head>
   <body>
@@ -24,7 +24,8 @@
           </span>
           <span>Social Circle</span>
         </a>
-        <button class="profile-button" id="open-settings" type="button" aria-label="Öppna meny">RM</button>
+        <button class="profile-button" id="open-settings" type="button" aria-label="Öppna allmänna inställningar">RM</button>
+        <button class="page-settings-button" id="open-page-settings" type="button" aria-label="Öppna sidans inställningar" hidden>⚙</button>
       </header>
 
       <main id="app" tabindex="-1">
@@ -95,6 +96,9 @@
           <div id="trips-panel" hidden><p class="panel-help">Resor beskriver förflyttningen: vart du ska, hur du tar dig dit, tid och kostnad.</p><div class="collection-list" id="trip-list"></div><div class="mini-empty" id="trip-empty"><span>→</span><h2>Inga resor ännu</h2><p>Planera en utflykt eller en längre resa.</p></div></div>
         </section>
 
+        <section class="view settings-view" data-view="people-settings" aria-labelledby="people-settings-title"><button class="back-button" type="button" data-go="people">‹ <span>People</span></button><div class="page-heading"><div><p class="eyebrow">People</p><h1 id="people-settings-title">Inställningar</h1></div></div><p class="intro">Välj stöd för dina relationer.</p><label class="settings-toggle"><input id="enable-relationship-ideas" type="checkbox" /><span><b>Relationsidéer</b><small>Visa förslag utifrån relationstyp i personens detaljvy.</small></span></label></section>
+        <section class="view settings-view" data-view="calendar-settings" aria-labelledby="calendar-settings-title"><button class="back-button" type="button" data-go="calendar">‹ <span>Calendar</span></button><div class="page-heading"><div><p class="eyebrow">Calendar</p><h1 id="calendar-settings-title">Inställningar</h1></div></div><p class="intro">Välj vad kalendern visar.</p><label class="settings-toggle"><input id="calendar-settings-routines" type="checkbox" /><span><b>Visa rutiner</b><small>Visa återkommande rutiner i kalendern.</small></span></label><label class="settings-toggle"><input id="calendar-settings-birthdays" type="checkbox" /><span><b>Visa födelsedagar</b><small>Visa födelsedagar från People.</small></span></label></section>
+        <section class="view settings-view" data-view="activities-settings" aria-labelledby="activities-settings-title"><button class="back-button" type="button" data-go="activities">‹ <span>Activities</span></button><div class="page-heading"><div><p class="eyebrow">Activities</p><h1 id="activities-settings-title">Inställningar</h1></div></div><p class="intro">Lägg till färdiga idéer i ditt aktivitetsbibliotek.</p><label class="settings-toggle"><input id="enable-activity-pack" type="checkbox" /><span><b>Allmänt aktivitetspaket</b><small>Lägger till flera aktiviteter som du kan välja i planer. Dina egna aktiviteter behålls.</small></span></label><p class="panel-help" id="activity-pack-status" role="status"></p></section>
         <section class="view settings-view" data-view="settings" aria-labelledby="settings-title">
           <button class="back-button" type="button" data-go="today">‹ <span>Tillbaka</span></button>
           <div class="page-heading"><div><p class="eyebrow">Meny</p><h1 id="settings-title">Settings</h1></div></div>
@@ -169,6 +173,6 @@
     <dialog id="event-dialog"><form method="dialog" id="event-form"><input type="hidden" name="id" /><div class="dialog-heading"><div><p class="eyebrow">Historik</p><h2>Logga en händelse</h2></div><button class="close-button" value="cancel" aria-label="Stäng">×</button></div><label>Vad hände?<input name="title" placeholder="Till exempel: Söndagspromenad" required maxlength="80" /></label><div class="form-pair"><label>Datum<input name="date" type="date" required /></label><label>Tid<input name="time" type="time" value="18:00" /></label></div><label>Aktivitet<select name="activityId" id="event-activity"><option value="">Ingen vald aktivitet</option></select></label><fieldset><legend>Personer</legend><div class="check-grid" id="event-people"></div></fieldset><fieldset><legend>Cirklar</legend><div class="check-grid" id="event-circles"></div></fieldset><label>Anteckning<textarea name="notes" placeholder="Tankar eller något du vill minnas" maxlength="700"></textarea></label><div class="dialog-actions"><button class="secondary-button" value="cancel">Avbryt</button><button class="primary-button" value="default">Spara i historiken</button></div></form></dialog>
 
     <datalist id="activity-category-suggestions"><option value="Fika"></option><option value="Mat"></option><option value="Kultur"></option><option value="Träning"></option><option value="Natur"></option><option value="Spel"></option><option value="Återhämtning"></option></datalist><datalist id="place-category-suggestions"><option value="Café"></option><option value="Restaurang"></option><option value="Park"></option><option value="Kultur"></option><option value="Träning"></option><option value="Butik"></option><option value="Utflyktsmål"></option></datalist>
-    <script type="module" src="js/app.js?v=2.3.1"></script>
+    <script type="module" src="js/app.js?v=2.4.0"></script>
   </body>
 </html>

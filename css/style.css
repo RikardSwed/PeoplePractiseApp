@@ -30,6 +30,10 @@ button { color: inherit; }
 .brand-mark span { position: absolute; width: 17px; height: 17px; border: 1.8px solid var(--sage-dark); border-radius: 50%; }
 .brand-mark span:nth-child(1) { left: 1px; top: 6px; }.brand-mark span:nth-child(2) { right: 1px; top: 6px; }.brand-mark span:nth-child(3) { left: 7px; top: 1px; background: rgba(223,232,221,.75); }
 .profile-button { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--peach); font-size: 12px; font-weight: 800; cursor: pointer; }
+.page-settings-button { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--sage-soft); color: var(--sage-dark); font-size: 23px; cursor: pointer; }
+.settings-toggle { display:flex; align-items:center; gap:15px; margin:12px 0; padding:18px; border-radius:20px; background:var(--surface); box-shadow:0 7px 22px rgba(49,64,53,.06); cursor:pointer; }
+.settings-toggle input { width:20px; height:20px; flex:0 0 auto; accent-color:var(--sage-dark); }
+.settings-toggle b,.settings-toggle small { display:block; }.settings-toggle small { margin-top:4px; color:var(--muted); line-height:1.4; }
 .view { display: none; animation: view-in .24s ease both; }.view.is-active { display: block; }
 @keyframes view-in { from { opacity: 0; transform: translateY(6px); } }
 .eyebrow { margin: 0 0 5px; color: var(--sage); text-transform: uppercase; letter-spacing: .12em; font-weight: 800; font-size: 11px; }

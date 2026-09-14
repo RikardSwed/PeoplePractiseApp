@@ -1,11 +1,11 @@
-import { store } from "./storage.js?v=2.3.1";
-import { initFileTest } from "./file-test.js?v=2.3.1";
-import { APP_VERSION, initVersionInfo } from "./version.js?v=2.3.1";
+import { store } from "./storage.js?v=2.4.0";
+import { initFileTest } from "./file-test.js?v=2.4.0";
+import { APP_VERSION, initVersionInfo } from "./version.js?v=2.4.0";
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
 const keys = { plans:"plans", people:"people", activities:"activities", circles:"circles", agenda:"agenda", events:"events", bundles:"bundles", places:"places", goals:"goals", projects:"projects", trips:"trips" };
-const viewNames = { today:"Today", people:"People", calendar:"Calendar", activities:"Activities", settings:"Settings", changelog:"What’s new" };
+const viewNames = { today:"Today", people:"People", calendar:"Calendar", activities:"Activities", settings:"Settings", changelog:"What’s new", "people-settings":"People settings", "calendar-settings":"Calendar settings", "activities-settings":"Activities settings" };
 const activityIcons = { Fika:"☕", Mat:"🍽", Utomhus:"🌿", Kultur:"🎭", Träning:"⚡", Annat:"✦" };
 const uid = () => crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`;
 const dateKey = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
@@ -65,8 +65,10 @@ function showView() {
   const wanted=location.hash.slice(1), active=viewNames[wanted]?wanted:"today";
   $$('[data-view]').forEach(v=>v.classList.toggle("is-active",v.dataset.view===active));
   $$('[data-nav]').forEach(item=>{const on=item.dataset.nav===active;item.classList.toggle("is-active",on);on?item.setAttribute("aria-current","page"):item.removeAttribute("aria-current");});
-  $(".bottom-nav").hidden = active === "settings" || active === "changelog";
-  $("#open-settings").hidden = active === "settings" || active === "changelog";
+  $(".bottom-nav").hidden = active === "settings" || active === "changelog" || active.endsWith("-settings");
+  $("#open-settings").hidden = active !== "today";
+  $("#open-page-settings").hidden = !["people","calendar","activities"].includes(active);
+  $("#open-page-settings").onclick = () => { location.hash = `${active}-settings`; };
   document.title=`${viewNames[active]} · Social Circle`;
 }
 
@@ -199,6 +201,48 @@ function openEventDialog(prefill=currentEntity){const f=$("#event-form");f.reset
 
 function renderAll(){renderToday();renderPeople();renderCalendar();renderActivities();renderBundles();renderPlaces();renderLibraryCollection("goals");renderLibraryCollection("projects");renderLibraryCollection("trips");if($("#entity-dialog").open)renderEntity();}
 
+const ACTIVITY_PACK = [
+  ["Ta en promenad tillsammans","Utomhus",0,60,2,2,["outdoor"]],
+  ["Fika och prata","Fika",100,90,0,2,["indoor","outdoor"]],
+  ["Laga middag ihop","Mat",150,120,1,2,["indoor"]],
+  ["Besök ett museum","Kultur",150,120,1,2,["indoor"]],
+  ["Spela brädspel","Annat",0,120,0,3,["indoor"]],
+  ["Gör en dagsutflykt","Utomhus",250,240,2,2,["outdoor"]],
+];
+const relationLabels = {self:"Mig själv",son:"Son",dotter:"Dotter",barn:"Barn",partner:"Partner",foralder:"Förälder",syskon:"Syskon",van:"Vän",kollega:"Kollega",annan:"Annan relation"};
+const relationIdeas = {
+  son:["Fråga vad han ser fram emot just nu","Planera en stund tillsammans utifrån hans intressen"],
+  dotter:["Fråga vad hon ser fram emot just nu","Planera en stund tillsammans utifrån hennes intressen"],
+  barn:["Fråga vad barnet vill göra tillsammans","Skapa tid för ett ostört samtal"],
+  partner:["Planera kvalitetstid tillsammans","Fråga vad din partner behöver just nu"],
+  foralder:["Hör av dig och fråga hur veckan varit","Planera ett gemensamt besök"],
+  syskon:["Föreslå något ni båda tycker om","Hör av dig utan särskild anledning"],
+  van:["Föreslå en fika eller promenad","Följ upp något ni pratade om senast"],
+  kollega:["Ta en gemensam lunch","Fråga hur ett viktigt projekt går"],
+  self:["Planera tid för återhämtning","Fundera över vad du själv behöver"],
+};
+const openPersonDialogBase=openPersonDialog;
+openPersonDialog=function(person=null){openPersonDialogBase(person);const form=$("#person-form");form.elements.isSelf.checked=Boolean(person?.isSelf);form.elements.relationType.value=person?.isSelf?"":person?.relationType||"";form.elements.relationType.disabled=form.elements.isSelf.checked;form.elements.isSelf.onchange=()=>{form.elements.relationType.disabled=form.elements.isSelf.checked;};};
+const renderRelationshipDevelopmentBase=renderRelationshipDevelopment;
+renderRelationshipDevelopment=function(){renderRelationshipDevelopmentBase();$("#relation-ideas")?.remove();if(currentEntity?.type!=="person"||!store.database.preferences?.relationshipIdeas)return;const person=read(keys.people).find(item=>item.id===currentEntity.id),ideas=relationIdeas[person?.isSelf?"self":person?.relationType];if(!ideas)return;const section=document.createElement("section");section.id="relation-ideas";section.className="person-details relationship-development";section.innerHTML=`<div class="relationship-picture"><h3>Idéer för ${escapeHtml(relationLabels[person.isSelf?"self":person.relationType]||"relationen")}</h3><ul>${ideas.map(idea=>`<li>${escapeHtml(idea)}</li>`).join("")}</ul><small>Förslag att anpassa efter er relation.</small></div>`;$("#agenda-panel").append(section);};
+function initPageFeatures(){
+  const preferences=store.database.preferences||{};
+  const setToggle=(id,key,defaultValue=false)=>{const input=$(id);input.checked=preferences[key]??defaultValue;input.onchange=()=>store.setPreference(key,input.checked);};
+  setToggle("#enable-relationship-ideas","relationshipIdeas");
+  setToggle("#calendar-settings-routines","calendarRoutines",true);
+  setToggle("#calendar-settings-birthdays","calendarBirthdays",true);
+  showCalendarRoutines=preferences.calendarRoutines??true;showCalendarBirthdays=preferences.calendarBirthdays??true;
+  $("#show-calendar-routines").checked=showCalendarRoutines;$("#show-calendar-birthdays").checked=showCalendarBirthdays;
+  $("#calendar-settings-routines").onchange=e=>{$("#show-calendar-routines").checked=showCalendarRoutines=e.target.checked;store.setPreference("calendarRoutines",showCalendarRoutines);renderCalendar();};
+  $("#calendar-settings-birthdays").onchange=e=>{$("#show-calendar-birthdays").checked=showCalendarBirthdays=e.target.checked;store.setPreference("calendarBirthdays",showCalendarBirthdays);renderCalendar();};
+  const pack=$("#enable-activity-pack");pack.checked=Boolean(preferences.activityPack);const updatePackStatus=()=>{$("#activity-pack-status").textContent=pack.checked?"Paketet är aktivt. Aktiviteterna finns i biblioteket och kan ändras som vanligt.":"Paketet är avstängt. Tidigare tillagda aktiviteter behålls.";};updatePackStatus();
+  pack.onchange=()=>{store.setPreference("activityPack",pack.checked);if(pack.checked){const activities=read(keys.activities),existing=new Set(activities.map(item=>item.title.toLocaleLowerCase("sv")));ACTIVITY_PACK.forEach(([title,category,estimatedCost,duration,activityLevel,socialLevel,environments])=>{if(!existing.has(title.toLocaleLowerCase("sv")))activities.push({id:uid(),title,tags:[category],category,estimatedCost,duration,activityLevel,socialLevel,environments,place:"Ej angivet",favorite:false,sourcePack:"general"});});write(keys.activities,activities);}updatePackStatus();};
+  const form=$("#person-form");form.elements.group.closest("label").insertAdjacentHTML("afterend",'<label>Relation till dig<select name="relationType"><option value="">Välj relationstyp</option><option value="son">Son</option><option value="dotter">Dotter</option><option value="barn">Barn</option><option value="partner">Partner</option><option value="foralder">Förälder</option><option value="syskon">Syskon</option><option value="van">Vän</option><option value="kollega">Kollega</option><option value="annan">Annan relation</option></select></label><label class="toggle-row"><input name="isSelf" type="checkbox" /><span><b>Det här är jag</b><small>Markera din egen personliga profil. Det kan bara finnas en.</small></span></label>');
+  form.addEventListener("submit",e=>{if(e.submitter?.value==="cancel")return;const d=new FormData(form),id=d.get("id")||read(keys.people).at(-1)?.id,people=read(keys.people),person=people.find(item=>item.id===id);if(!person)return;person.isSelf=d.get("isSelf")==="on";person.relationType=person.isSelf?"self":d.get("relationType")||"";if(person.isSelf)people.forEach(item=>{if(item.id!==person.id){item.isSelf=false;if(item.relationType==="self")item.relationType="";}});write(keys.people,people);updateProfileInitials();});
+  updateProfileInitials();
+}
+function updateProfileInitials(){const self=read(keys.people).find(person=>person.isSelf);$("#open-settings").textContent=self?.name?initials(self.name):"RM";}
+
 function initExtendedUi(){
   const activityControls=$(".activity-controls"),physicalSelect=document.createElement("select"),socialSelect=document.createElement("select");physicalSelect.id="activity-physical-filter";physicalSelect.setAttribute("aria-label","Fysisk nivå");physicalSelect.innerHTML='<option value="all">Alla fysiska nivåer</option><option value="0">Mycket lugn eller mer</option><option value="1">Lugn eller mer</option><option value="2">Måttlig eller mer</option><option value="3">Ansträngande</option>';socialSelect.id="activity-social-filter";socialSelect.setAttribute("aria-label","Social nivå");socialSelect.innerHTML='<option value="all">Alla sociala nivåer</option><option value="0">Ensam eller mer</option><option value="1">Lite social eller mer</option><option value="2">Social eller mer</option><option value="3">Mycket social</option>';activityControls.querySelector("#activity-sort").before(physicalSelect,socialSelect);
   physicalSelect.onchange=e=>{activityPhysical=e.target.value;renderActivities();};socialSelect.onchange=e=>{activitySocial=e.target.value;renderActivities();};
@@ -303,10 +347,10 @@ $("#activity-view-switch").onclick=e=>{if(!e.target.dataset.activityView)return;
 $("#toggle-activity-filters").onclick=e=>{const panel=$("#activity-filter-panel"),opening=panel.hidden;panel.hidden=!opening;e.currentTarget.setAttribute("aria-expanded",String(opening));e.currentTarget.classList.toggle("is-active",opening);};
 $("#calendar-modes").onclick=e=>{if(!e.target.dataset.calendarMode)return;calendarMode=e.target.dataset.calendarMode;shownMonth=calendarMode==="month"?new Date(new Date().getFullYear(),new Date().getMonth(),1):new Date();selectedDate=todayKey;$$('#calendar-modes button').forEach(b=>b.classList.toggle("is-active",b===e.target));renderCalendar();};$("#prev-month").onclick=()=>shiftCalendar(-1);$("#next-month").onclick=()=>shiftCalendar(1);
 $("#calendar-agenda-tabs").onclick=e=>{if(!e.target.dataset.agendaMode)return;calendarAgendaMode=e.target.dataset.agendaMode;$$('#calendar-agenda-tabs button').forEach(button=>button.classList.toggle("is-active",button===e.target));renderCalendar();};
-$("#show-calendar-routines").onchange=e=>{showCalendarRoutines=e.target.checked;renderCalendar();};
-$("#show-calendar-birthdays").onchange=e=>{showCalendarBirthdays=e.target.checked;renderCalendar();};
+$("#show-calendar-routines").onchange=e=>{showCalendarRoutines=e.target.checked;$("#calendar-settings-routines").checked=showCalendarRoutines;store.setPreference("calendarRoutines",showCalendarRoutines);renderCalendar();};
+$("#show-calendar-birthdays").onchange=e=>{showCalendarBirthdays=e.target.checked;$("#calendar-settings-birthdays").checked=showCalendarBirthdays;store.setPreference("calendarBirthdays",showCalendarBirthdays);renderCalendar();};
 
 function initMobileSearch(){$$('.section-search').forEach(input=>input.addEventListener("focus",()=>{input.scrollIntoView({behavior:"auto",block:"start"});}));}
 function initRelationshipForms(){[["#person-dialog",keys.people],["#circle-dialog",keys.circles]].forEach(([selector,collection])=>{const dialog=$(selector),form=dialog.querySelector("form");dialog.addEventListener("focusin",()=>{const item=read(collection).find(entry=>entry.id===form.elements.id.value);["strengths","challenges","needs","boundaries","relationshipQuestions","appreciation"].forEach(field=>{if(form.elements[field]&&item&&form.elements[field].value!==item[field])form.elements[field].value=item[field]||"";});},{capture:true});});}
 function dismissSplash(){const splash=$("#splash-screen");setTimeout(()=>{splash.classList.add("is-hidden");setTimeout(()=>splash.remove(),450);},650);}
-const formatted=prettyDate(todayKey);$("#today-date").textContent=formatted.charAt(0).toUpperCase()+formatted.slice(1);initExtendedUi();archivePastPlans();store.subscribe(()=>{renderAll();queueMicrotask(archivePastPlans);});window.addEventListener("hashchange",showView);initFileTest();initBackupTools();initMarkdownImport();initVersionInfo();initMobileSearch();initRelationshipForms();showView();renderAll();dismissSplash();
+const formatted=prettyDate(todayKey);$("#today-date").textContent=formatted.charAt(0).toUpperCase()+formatted.slice(1);initExtendedUi();initPageFeatures();archivePastPlans();store.subscribe(()=>{renderAll();queueMicrotask(archivePastPlans);});window.addEventListener("hashchange",showView);$("#open-settings").onclick=()=>{location.hash="settings";};initFileTest();initBackupTools();initMarkdownImport();initVersionInfo();initMobileSearch();initRelationshipForms();showView();renderAll();dismissSplash();

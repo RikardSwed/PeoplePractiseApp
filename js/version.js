@@ -1,6 +1,7 @@
-export const APP_VERSION = "2.3.1 Heron";
+export const APP_VERSION = "2.4.0 Heron";
 
 export const RELEASES = [
+  { version: "2.4.0 Heron", date: "14 september 2026", title: "Sidinställningar och personliga relationer", changes: ["Egna inställningar för People, Calendar och Activities", "Valbart aktivitetspaket med färdiga idéer", "Relationstyp, relationsidéer och en särskild profil för dig själv"] },
   {
     version: "2.3.1 Heron",
     date: "10 september 2026",
