@@ -1,6 +1,8 @@
-export const APP_VERSION = "2.5.0 Heron";
+export const APP_VERSION = "2.7.0 Heron";
 
 export const RELEASES = [
+  { version: "2.7.0 Heron", date: "15 september 2026", title: "Planeringspåminnelser och gästlistor", changes: ["Flera valbara påminnelser inför födelsedagar, viktiga dagar och högtider", "Påminnelser på Today kan planeras direkt, markeras som sedda eller svepas bort", "Mors dag, jul, nyår, midsommar och påsk ger planeringsstöd", "Egna evenemang har gästlista med svaren inbjuden, kommer, kanske och kommer inte"] },
+  { version: "2.6.0 Heron", date: "15 september 2026", title: "Viktiga dagar och fler kalendrar", changes: ["Svenska fasta och rörliga helgdagar i kalendern", "Återkommande viktiga dagar för varje person", "Kategorier i sidornas inställningar", "Växling mellan Social Circle och en inbäddad Google Calendar"] },
   { version: "2.5.0 Heron", date: "15 september 2026", title: "Relationsbibliotek och balans", changes: ["Fler relationstyper och ett eget idébibliotek per person", "Relationsidéer kan läggas till, tas bort och bokas direkt", "Nya paket för barn, fru, platser och Skåne", "Historiken visar frekvens, aktivitetstyper och balansaspekter"] },
   { version: "2.4.0 Heron", date: "14 september 2026", title: "Sidinställningar och personliga relationer", changes: ["Egna inställningar för People, Calendar och Activities", "Valbart aktivitetspaket med färdiga idéer", "Relationstyp, relationsidéer och en särskild profil för dig själv"] },
   {
